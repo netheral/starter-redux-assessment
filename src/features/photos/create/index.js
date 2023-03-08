@@ -1,13 +1,13 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addPhoto } from '../photos.slice.js';
 
-// Task 2: Import the `useDispatch()` method from the appropriate package
-// Task 3: Import the `addPhoto()` action creator from the photos slice
 
 import './create.css';
 
 export default function CreatePhoto() {
   const [formData, setFormData] = useState({ imageUrl: '', caption: '' });
-  // Task 4: Store a reference to the Redux store's dispatch method in a variable called `dispatch`
+  const dispatch = useDispatch();
 
   function handleChange({ target: { name, value } }) {
     setFormData({
@@ -18,31 +18,31 @@ export default function CreatePhoto() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // Task 5: Dispatch the `addPhoto()` action creator, passing in the form data
+    dispatch(addPhoto(formData));
     setFormData({ imageUrl: '', caption: '' });
   }
 
   return (
     <form className="create-form" onSubmit={handleSubmit}>
-      <h2>Add a dog</h2>
+      <h2>Add a photo</h2>
       <div>
-        <label htmlFor="url">Enter your image's url: </label>
+        <label htmlFor="url">Enter your image's url</label>
         <input
           id="url"
           name="imageUrl"
           onChange={handleChange}
-          placeholder="e.g., https://images.dog.ceo/breeds/australian-shepherd/pepper.jpg"
+          placeholder="e.g., https://example.com/photo.jpg"
           type="text"
           value={formData.imageUrl}
         />
       </div>
       <div>
-        <label htmlFor="caption">Enter your image's caption: </label>
+        <label htmlFor="caption">Enter your image's caption:</label>
         <input
           id="caption"
           name="caption"
           onChange={handleChange}
-          placeholder="e.g., Australian Shepherd"
+          placeholder="e.g., My awesome photo"
           type="text"
           value={formData.caption}
         />

@@ -30,3 +30,4 @@ test('displays a dog suggestion', async () => {
   expect(screen.getByText(/loading/i)).toBeInTheDocument();
   expect(await screen.findByText(/malinois/i)).toBeInTheDocument();
 });
+
